@@ -329,6 +329,11 @@ func extractScopeFromEngagement(getBriefVersionDocument string, token string, pD
 		return errors.New(WAF_BANNED_ERROR)
 	}
 
+	// Likely from a knownHandle we passed that's actually gone now
+	if res.StatusCode == 404 {
+		return
+	}
+
 	// Extract the "scope" array from the JSON
 	scopeArray := gjson.Get(res.BodyString, "data.scope")
 
@@ -536,6 +541,10 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories st
 					default:
 					}
 					return
+				}
+
+				if pScope.InScope == nil || len(pScope.InScope) == 0 {
+					continue
 				}
 
 				if pScope.InScope == nil || len(pScope.InScope) == 0 {
