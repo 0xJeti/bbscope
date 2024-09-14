@@ -9,14 +9,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/sw33tLie/bbscope/internal/utils"
-	"github.com/sw33tLie/bbscope/pkg/scope"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
+	"github.com/0xJeti/bbscope/internal/utils"
+	"github.com/0xJeti/bbscope/pkg/scope"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/tidwall/gjson"
 )
 
 func getProgramScope(authorization string, id string, bbpOnly bool, categories []string, includeOOS bool) (pData scope.ProgramData, err error) {
 	pData.Url = "https://hackerone.com/" + id
+	pData.Handle = id
 	currentPageURL := "https://api.hackerone.com/v1/hackers/programs/" + id + "/structured_scopes?page%5Bnumber%5D=1&page%5Bsize%5D=100"
 
 	// loop through pages

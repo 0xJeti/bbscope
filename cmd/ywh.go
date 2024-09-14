@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/0xJeti/bbscope/pkg/platforms/yeswehack"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/spf13/cobra"
-	"github.com/sw33tLie/bbscope/pkg/platforms/yeswehack"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
 )
 
 // ywhCmd represents the ywh command

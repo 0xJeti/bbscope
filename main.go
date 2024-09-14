@@ -1,6 +1,6 @@
 package main
 
-import "github.com/sw33tLie/bbscope/cmd"
+import "github.com/0xJeti/bbscope/cmd"
 
 func main() {
 	cmd.Execute()

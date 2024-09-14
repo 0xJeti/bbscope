@@ -6,9 +6,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sw33tLie/bbscope/internal/utils"
-	"github.com/sw33tLie/bbscope/pkg/scope"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
+	"github.com/0xJeti/bbscope/internal/utils"
+	"github.com/0xJeti/bbscope/pkg/scope"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/tidwall/gjson"
 )
 
@@ -129,6 +129,7 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 		records := gjson.Get(bodyString, "records").Array()
 		for _, record := range records {
 			id := record.Get("id").String()
+			handle := record.Get("handle").String()
 			maxBounty := record.Get("maxBounty.value").Int()
 			confidentialityLevel := record.Get("confidentialityLevel.id").Int()
 			programPath := strings.Split(record.Get("webLinks.detail").String(), "=")[1]
@@ -140,6 +141,7 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 				if (bbpOnly && maxBounty != 0) || !bbpOnly {
 					pData := GetProgramScope(token, id, categories, bbpOnly, includeOOS)
 					pData.Url = "https://app.intigriti.com/researcher" + programPath
+					pData.Handle = handle
 					if printRealTime {
 						scope.PrintProgramScope(pData, outputFlags, delimiterCharacter, includeOOS)
 					}

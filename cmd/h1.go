@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/0xJeti/bbscope/internal/utils"
+	"github.com/0xJeti/bbscope/pkg/platforms/hackerone"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/spf13/cobra"
-	"github.com/sw33tLie/bbscope/internal/utils"
-	"github.com/sw33tLie/bbscope/pkg/platforms/hackerone"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
 )
 
 // h1Cmd represents the h1 command
