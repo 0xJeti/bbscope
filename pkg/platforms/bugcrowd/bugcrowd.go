@@ -12,11 +12,11 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/0xJeti/bbscope/internal/utils"
+	"github.com/0xJeti/bbscope/pkg/scope"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/hashicorp/go-retryablehttp"
-	"github.com/sw33tLie/bbscope/internal/utils"
-	"github.com/sw33tLie/bbscope/pkg/scope"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
 	"github.com/tidwall/gjson"
 )
 
@@ -230,6 +230,7 @@ func GetProgramScope(handle string, categories string, token string) (pData scop
 	isEngagement := strings.HasPrefix(handle, "/engagements/")
 
 	pData.Url = "https://bugcrowd.com/" + strings.TrimPrefix(handle, "/")
+	pData.Handle = handle
 
 	if isEngagement {
 		getBriefVersionDocument, err := getEngagementBriefVersionDocument(handle, token)

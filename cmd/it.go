@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"github.com/0xJeti/bbscope/pkg/platforms/intigriti"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/spf13/cobra"
-	"github.com/sw33tLie/bbscope/pkg/platforms/intigriti"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
 )
 
 // itCmd represents the it command

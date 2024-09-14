@@ -5,9 +5,9 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/0xJeti/bbscope/pkg/scope"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/sw33tLie/bbscope/pkg/scope"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
 	"github.com/tidwall/gjson"
 )
 

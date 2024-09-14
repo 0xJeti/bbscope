@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/sw33tLie/bbscope/pkg/platforms/hackerone"
+	"github.com/0xJeti/bbscope/pkg/platforms/hackerone"
 )
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 	}
 
 	// All platforms are supported, syntax is similar
-	scope := hackerone.GetAllProgramsScope(b64.StdEncoding.EncodeToString([]byte(*userFlag+":"+*tokenFlag)), true, true, false, "all", true, 2, false, "", "", true)
+	scope, _ := hackerone.GetAllProgramsScope(b64.StdEncoding.EncodeToString([]byte(*userFlag+":"+*tokenFlag)), true, true, false, "all", true, 2, false, "", "", true)
 
 	for _, s := range scope {
 		for _, elem := range s.InScope {

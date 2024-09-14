@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/sw33tLie/bbscope/pkg/scope"
-	"github.com/sw33tLie/bbscope/pkg/whttp"
+	"github.com/0xJeti/bbscope/pkg/scope"
+	"github.com/0xJeti/bbscope/pkg/whttp"
 	"github.com/tidwall/gjson"
 )
 
@@ -37,6 +37,7 @@ func GetCategoryID(input string) []string {
 
 func GetProgramScope(token string, companySlug string, categories string) (pData scope.ProgramData) {
 	pData.Url = YESWEHACK_PROGRAM_BASE_ENDPOINT + companySlug
+	pData.Handle = companySlug
 
 	res, err := whttp.SendHTTPRequest(
 		&whttp.WHTTPReq{

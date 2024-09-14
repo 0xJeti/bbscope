@@ -14,6 +14,7 @@ type ScopeElement struct {
 
 type ProgramData struct {
 	Url        string
+	Handle     string
 	InScope    []ScopeElement
 	OutOfScope []ScopeElement
 }
@@ -21,7 +22,7 @@ type ProgramData struct {
 func PrintProgramScope(programScope ProgramData, outputFlags string, delimiter string, includeOOS bool) {
 	printScope := func(scope []ScopeElement, prefix string) {
 		for _, scopeElement := range scope {
-			line := createLine(scopeElement, programScope.Url, outputFlags, delimiter)
+			line := createLine(scopeElement, programScope.Url, outputFlags, delimiter, programScope.Handle)
 			if len(line) > 0 {
 				fmt.Println(prefix + line)
 			}
@@ -34,7 +35,7 @@ func PrintProgramScope(programScope ProgramData, outputFlags string, delimiter s
 	}
 }
 
-func createLine(scopeElement ScopeElement, url, outputFlags, delimiter string) string {
+func createLine(scopeElement ScopeElement, url, outputFlags, delimiter string, handle string) string {
 	var line string
 	for _, f := range outputFlags {
 		switch f {
@@ -46,6 +47,8 @@ func createLine(scopeElement ScopeElement, url, outputFlags, delimiter string) s
 			line += scopeElement.Category + delimiter
 		case 'u':
 			line += url + delimiter
+		case 'h':
+			line += handle + delimiter
 		default:
 			log.Fatal("Invalid print flag")
 		}
