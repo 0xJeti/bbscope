@@ -28,7 +28,7 @@ func main() {
 	}
 
 	// All platforms are supported, syntax is similar
-	scope, _ := hackerone.GetAllProgramsScope(b64.StdEncoding.EncodeToString([]byte(*userFlag+":"+*tokenFlag)), true, true, false, "all", true, 2, false, "", "", true)
+	scope, _ := hackerone.GetAllProgramsScope(b64.StdEncoding.EncodeToString([]byte(*userFlag+":"+*tokenFlag)), true, true, false, "all", true, 2, false, "", "", false)
 
 	for _, s := range scope {
 		for _, elem := range s.InScope {
