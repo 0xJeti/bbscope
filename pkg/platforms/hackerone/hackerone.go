@@ -122,8 +122,8 @@ func getCategories(input string) []string {
 	}
 
 	categories := map[string][]string{
-		"url":        {"URL", "WILDCARD", "IP_ADDRESS"},
-		"cidr":       {"CIDR"},
+		"url":        {"URL", "WILDCARD"},
+		"cidr":       {"CIDR", "IP_ADDRESS"},
 		"mobile":     {"GOOGLE_PLAY_APP_ID", "OTHER_APK", "APPLE_STORE_APP_ID"},
 		"android":    {"GOOGLE_PLAY_APP_ID", "OTHER_APK"},
 		"apple":      {"APPLE_STORE_APP_ID", "TESTFLIGHT"},
