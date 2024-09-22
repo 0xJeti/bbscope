@@ -130,6 +130,7 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 			id := record.Get("id").String()
 			handle := record.Get("handle").String()
 			maxBounty := record.Get("maxBounty.value").Int()
+			activeFlag := (record.Get("status.value").String() == "Open")
 			confidentialityLevel := record.Get("confidentialityLevel.id").Int()
 			programPath := strings.Split(record.Get("webLinks.detail").String(), "=")[1]
 
@@ -141,6 +142,7 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 					pData := GetProgramScope(token, id, categories, bbpOnly, includeOOS)
 					pData.Url = "https://app.intigriti.com/researcher" + programPath
 					pData.Handle = handle
+					pData.Active = activeFlag
 					if printRealTime {
 						scope.PrintProgramScope(pData, outputFlags, delimiterCharacter, includeOOS)
 					}

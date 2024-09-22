@@ -231,16 +231,21 @@ func GetProgramHandles(sessionToken string, engagementType string, pvtOnly bool)
 func GetProgramScope(handle string, categories string, token string) (pData scope.ProgramData) {
 	isEngagement := strings.HasPrefix(handle, "/engagements/")
 
+	var programHandle string
 	pData.Url = "https://bugcrowd.com/" + strings.TrimPrefix(handle, "/")
-	pData.Handle = handle
+
 	if isEngagement {
+		programHandle = strings.TrimPrefix(handle, "/engagements/")
 		getBriefVersionDocument := getEngagementBriefVersionDocument(handle, token)
 		if getBriefVersionDocument != "" {
 			extractScopeFromEngagement(getBriefVersionDocument, token, &pData)
 		}
 	} else {
+		programHandle = strings.TrimPrefix(handle, "/")
 		extractScopeFromTargetGroups(pData.Url, categories, token, &pData)
 	}
+
+	pData.Handle = programHandle
 
 	return pData
 }
@@ -315,6 +320,10 @@ func extractScopeFromEngagement(getBriefVersionDocument string, token string, pD
 	// Extract the "scope" array from the JSON
 	scopeArray := gjson.Get(res.BodyString, "data.scope")
 
+	// Extract the "scope" array from the JSON
+	engagementActive := gjson.Get(res.BodyString, "data.engagement.state").String()
+
+	pData.Active = (engagementActive == "in_progress")
 	// Iterate over each element of the "scope" array
 	scopeArray.ForEach(func(key, value gjson.Result) bool {
 		// Check if the scope element is in-scope
@@ -370,6 +379,7 @@ func extractScopeFromTargetGroups(url string, categories string, token string, p
 		noScopeTable = false
 	}
 
+	pData.Active = true // target group doesn't contain status info (assume true)
 	if noScopeTable {
 		pData.InScope = append(pData.InScope, scope.ScopeElement{Target: "NO_IN_SCOPE_TABLE", Description: "", Category: ""})
 	}

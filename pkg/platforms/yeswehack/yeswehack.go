@@ -51,6 +51,9 @@ func GetProgramScope(token string, companySlug string, categories string) (pData
 	}
 
 	chunkData := gjson.GetMany(res.BodyString, "scopes.#.scope", "scopes.#.scope_type")
+	activeFlag := !gjson.Get(res.BodyString, "disabled").Bool()
+
+	pData.Active = activeFlag
 
 	for i := 0; i < len(chunkData[0].Array()); i++ {
 		selectedCatIDs := GetCategoryID(categories)

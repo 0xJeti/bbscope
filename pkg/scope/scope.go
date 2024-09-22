@@ -15,6 +15,7 @@ type ScopeElement struct {
 type ProgramData struct {
 	Url        string
 	Handle     string
+	Active     bool
 	InScope    []ScopeElement
 	OutOfScope []ScopeElement
 }
