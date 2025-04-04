@@ -19,6 +19,7 @@ var itCmd = &cobra.Command{
 		outputFlags, _ := rootCmd.PersistentFlags().GetString("output")
 		delimiterCharacter, _ := rootCmd.PersistentFlags().GetString("delimiter")
 		includeOOS, _ := rootCmd.PersistentFlags().GetBool("oos")
+		activeOnly, _ := cmd.Flags().GetBool("active-only")
 
 		proxy, _ := rootCmd.PersistentFlags().GetString("proxy")
 		bbpOnly, _ := rootCmd.Flags().GetBool("bbpOnly")
@@ -28,7 +29,7 @@ var itCmd = &cobra.Command{
 			whttp.SetupProxy(proxy)
 		}
 
-		intigriti.GetAllProgramsScope(token, bbpOnly, pvtOnly, categories, outputFlags, delimiterCharacter, includeOOS, true)
+		intigriti.GetAllProgramsScope(token, bbpOnly, pvtOnly, categories, outputFlags, delimiterCharacter, includeOOS, true, activeOnly)
 	},
 }
 

@@ -95,7 +95,7 @@ func GetProgramScope(token string, programID string, categories string, bbpOnly 
 	return pData
 }
 
-func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, outputFlags, delimiterCharacter string, includeOOS, printRealTime bool) (programs []scope.ProgramData) {
+func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, outputFlags, delimiterCharacter string, includeOOS, printRealTime bool, activeOnly bool) (programs []scope.ProgramData) {
 	offset := 0
 	limit := 500
 	total := 0
@@ -139,15 +139,17 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 
 			if (pvtOnly && confidentialityLevel != 4) || !pvtOnly {
 				if (bbpOnly && maxBounty != 0) || !bbpOnly {
-					pData := GetProgramScope(token, id, categories, bbpOnly, includeOOS)
-					pData.Url = "https://app.intigriti.com/researcher" + programPath
-					pData.Handle = handle
-					pData.Active = activeFlag
-					if printRealTime {
-						scope.PrintProgramScope(pData, outputFlags, delimiterCharacter, includeOOS)
+					if (activeOnly && activeFlag) || !activeOnly {
+						pData := GetProgramScope(token, id, categories, bbpOnly, includeOOS)
+						pData.Url = "https://app.intigriti.com/researcher" + programPath
+						pData.Handle = handle
+						pData.Active = activeFlag
+						if printRealTime {
+							scope.PrintProgramScope(pData, outputFlags, delimiterCharacter, includeOOS)
+						}
+						programs = append(programs, pData)
 					}
 
-					programs = append(programs, pData)
 				}
 			}
 		}
