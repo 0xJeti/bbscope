@@ -215,7 +215,13 @@ func getProgramHandles(authorization string, pvtOnly bool, publicOnly bool, acti
 						}
 					} else {
 						newHandle.Active = (submissionState == "open")
-						handles = append(handles, newHandle)
+						if bbpOnly {
+							if offersBounties {
+								handles = append(handles, newHandle)
+							}
+						} else {
+							handles = append(handles, newHandle)
+						}
 					}
 				}
 			}
