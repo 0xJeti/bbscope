@@ -122,7 +122,7 @@ func GetAllProgramsScope(token string, bbpOnly bool, pvtOnly bool, categories, o
 
 		if offset == 0 {
 			total = int(gjson.Get(bodyString, "maxCount").Int())
-			utils.Log.Info("Total Programs available: ", total)
+			// utils.Log.Info("Total Programs available: ", total)
 		}
 
 		records := gjson.Get(bodyString, "records").Array()
